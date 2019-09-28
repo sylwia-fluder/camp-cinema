@@ -1,0 +1,18 @@
+@import '../../styles/variables';
+
+$color_Loading: $white;
+$color_Loading_Fixed: rgba($charcoal, .8);
+
+.loading {
+  color: $color_Loading;
+
+  &__fixed {
+    color: $color_Loading_Fixed;
+    margin: auto;
+    position: fixed;
+    top: 50%;
+    right: 50%;
+    bottom: 50%;
+    left: 50%;
+  }
+}

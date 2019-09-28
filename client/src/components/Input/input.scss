@@ -1,0 +1,50 @@
+@import '../../styles/variables';
+@import '../../styles/functions';
+
+$fontSize_Lg_Input: calculatePxToRem(25px);
+$boxShadow_Input: inset 0 4px 4px rgba($black, .25);
+$color_Input: $black;
+$color_Placeholder: $black;
+$color_Error_Input: $radical_red;
+$color_Error_Placeholder: $radical_red;
+
+.input {
+  border: 0;
+  border-radius: 5px;
+  box-shadow: $boxShadow_Input;
+  color: $color_Input;
+  display: block;
+  font-size: $fontSize_Lg_Input;
+  height: 51px;
+  padding-left: 25px;
+
+  & ~ & {
+    margin-top: 25px;
+  }
+
+  &::placeholder {
+    color: $color_Placeholder;
+    font-weight: $fontWeight_Light;
+  }
+
+  &__small {
+    width: 106px;
+  }
+
+  &__medium {
+    width: 247px;
+  }
+
+  &__large {
+    width: 323px;
+  }
+
+  &__error {
+    color: $color_Error_Input;
+
+    &::placeholder {
+      color: $color_Error_Placeholder;
+      font-weight: $fontWeight_Medium;
+    }
+  }
+}
