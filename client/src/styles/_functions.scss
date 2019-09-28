@@ -1,0 +1,4 @@
+@function calculatePxToRem($size) {
+  $remSize: $size / $fontSize_Base;
+  @return #{$remSize}rem;
+}

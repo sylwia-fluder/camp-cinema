@@ -1,0 +1,13 @@
+@import 'variables';
+@import 'functions';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $fontFamily_Base;
+  font-size: $fontSize_Base;
+}

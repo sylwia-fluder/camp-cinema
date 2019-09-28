@@ -1,0 +1,12 @@
+@import '../../styles/variables';
+
+$color_Error: $radical_red;
+
+.error {
+  color: $color_Error;
+  margin-top: 6px;
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}
