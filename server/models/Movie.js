@@ -5,7 +5,7 @@ const Movie = mongoose.model('Movies', new mongoose.Schema({
   title: {
     type: String,
     required: true,
-    minlength: 5,
+    minlength: 1,
     maxlength: 255
   },
   genre: { 
@@ -16,6 +16,7 @@ const Movie = mongoose.model('Movies', new mongoose.Schema({
   },
   ageLimit: {
     type: Number,
+    default: 0,
     get: v => (v = Math.round(v)),
     set: v => (v = Math.round(v)),
     max: 18,
@@ -55,7 +56,7 @@ const Movie = mongoose.model('Movies', new mongoose.Schema({
 
 function validateMovie(movie) {
   const schema = {
-    title: Joi.string().min(5).max(50).required(),
+    title: Joi.string().min(1).max(50).required(),
     genre: Joi.string().min(5).max(50).required(),
     ageLimit: Joi.number().max(18).min(0),
     runningTime: Joi.number().min(0),

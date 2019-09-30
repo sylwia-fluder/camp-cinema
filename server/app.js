@@ -8,16 +8,16 @@ const app = express();
 
 
 mongoose.connect('mongodb://localhost/campCinema')
-    .then(() => console.log('Connect to DB'))
-    .catch(err => console.error(err));
+  .then(() => console.log('Connect to DB'))
+  .catch(err => console.error(err));
 
 
 app.use(express.json());
 app.use('/api/movies',movies);
-/*app.use('/api/users',users);
+//app.use('/api/users',users);
 app.use('/api/screenings',screenings);
-app.use('/api/tickets',tickets);
-*/
+//app.use('/api/tickets',tickets);
+
 const port = process.env.port || 5000;
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
