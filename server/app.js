@@ -7,14 +7,14 @@ const tickets = require('./routes/tickets');
 const app = express();
 
 
-mongoose.connect('mongodb://localhost/cinema')
+mongoose.connect('mongodb://localhost/campCinema')
     .then(() => console.log('Connect to DB'))
     .catch(err => console.error(err));
 
 
 app.use(express.json());
-/*app.use('/api/movies',movies);
-app.use('/api/users',users);
+app.use('/api/movies',movies);
+/*app.use('/api/users',users);
 app.use('/api/screenings',screenings);
 app.use('/api/tickets',tickets);
 */
