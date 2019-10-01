@@ -44,4 +44,21 @@ Endpoints:
                 language: string            (enum -> ['PL','EN (SUB PL)', 'DUB PL','Original', 'Original (SUB PL)']),
                 date: Date,
             }
-        
+    User: 
+        Post - registration            -> /api/user
+
+            Body {
+                name: string                (
+                phone: string               (optional)
+                email: string
+                password: string
+            }
+    Auth:
+
+        Post - login                    -> /api/auth
+
+            Body {
+                email: string
+                password: string
+            }
+    

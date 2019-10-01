@@ -19,19 +19,15 @@ const userSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
-    required: true,
     minlength: 8,
     maxlength: 12,
   },
-  isRegistered: {
-    type: Boolean,
-    default: false,
+  tickets: {
+    type: Array
   },
   password: {
     type: String,
-    required:  function() {
-      return this.isRegistered;
-    },
+    required: true,
     minlength: 5,
     maxlength: 1024
   },
@@ -51,7 +47,6 @@ function validateUser(user) {
     phone: Joi.string().min(8).max(12),
     email: Joi.string().min(5).max(255).required().email(),
     password: Joi.string().min(5).max(255).required(),
-    isRegistered: Joi.boolean(),
     isAdmin: Joi.boolean(),
   };
 
