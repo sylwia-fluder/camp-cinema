@@ -14,7 +14,7 @@ mongoose.connect('mongodb://localhost/campCinema')
 
 app.use(express.json());
 app.use('/api/movies',movies);
-//app.use('/api/users',users);
+app.use('/api/users',users);
 app.use('/api/screenings',screenings);
 //app.use('/api/tickets',tickets);
 
