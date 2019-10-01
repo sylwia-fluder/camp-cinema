@@ -1,6 +1,16 @@
 @import 'variables';
 @import 'functions';
 
+
+$text-color: $white;
+$background-color: $dark-gray;
+$content-color: $gray;
+$box-shadow: $shadow;
+$button-radius: $button-radius;
+$button-padding: $button-padding;
+$button-color: $radical_red;
+
+
 * {
   margin: 0;
   padding: 0;
@@ -10,4 +20,21 @@
 body {
   font-family: $fontFamily_Base;
   font-size: $fontSize_Base;
+  background:linear-gradient($background-color, $background-color), url('/background-img.jpg');
+  background-size: cover;
+}
+
+
+.content {
+  background-color: $content-color;
+  position: relative;
+  top: 100px;
+  height: 350px;
+  box-shadow: $box-shadow;
+}
+
+.button {
+  background-color: $button-color;
+  padding: $button-padding;
+  border-radius: $button-radius;
 }
