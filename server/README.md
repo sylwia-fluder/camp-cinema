@@ -45,10 +45,11 @@ Endpoints:
                 date: Date,
             }
     User: 
-        Post - registration            -> /api/user
+        Get my tickets                 -> /api/users/user
+        Post - registration            -> /api/users
 
             Body {
-                name: string                (
+                name: string                
                 phone: string               (optional)
                 email: string
                 password: string
