@@ -44,6 +44,12 @@ Endpoints:
                 language: string            (enum -> ['PL','EN (SUB PL)', 'DUB PL','Original', 'Original (SUB PL)']),
                 date: Date,
             }
+        Put - set status as reserved   -> /api/screenings/reservation/:id
+
+            Body {
+                row: Number
+                num: Number
+            }
     User: 
         Get my tickets                 -> /api/users/user
         Post - registration            -> /api/users

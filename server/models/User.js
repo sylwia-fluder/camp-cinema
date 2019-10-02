@@ -1,6 +1,6 @@
 const config = require('config');
 const jwt = require('jsonwebtoken');
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 const mongoose = require('mongoose');
   
 const userSchema = new mongoose.Schema({

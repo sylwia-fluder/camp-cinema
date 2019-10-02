@@ -1,8 +1,9 @@
-const {Screening, validate} = require('../models/Screening');
+const {Screening, validate, validatePlace} = require('../models/Screening');
 const {Movie} = require('../models/Movie');
 const pick = require('lodash');
 const express = require('express');
 const router = express.Router();
+const {getScreeningRoom, seatUpdateAsReserved} =require('../controllers/screenings');
 
 router.get('/', async (req, res) => {
   res.send(await Screening.find().sort('movie.title').sort('date'));
@@ -40,14 +41,22 @@ router.post('/', async (req, res) => {
     typeOfScreening: req.body.typeOfScreening,
     language: req.body.language,
     date: req.body.date,
+    screeningRoom: getScreeningRoom(),
   });
   screening = await screening.save();
 
   res.send(screening);
 });
 
+router.put('/reservation/:id', async (req, res) => {
+  const {error} = validatePlace(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+  
+  res.send(await seatUpdateAsReserved(res, req.params.id, req.body.row, req.body.num));
+});
+
 router.put('/:id', async (req, res) => {
-  let screening = await Screening.findByIdAndUpdate(
+  const screening = await Screening.findByIdAndUpdate(
     req.params.id,
     pick(req.body, ['priceNormalTicket','typeOfScreening','language','date']),{ new: true });
   if (!screening) return res.status(404).send('The screening with given ID is not found!');
@@ -61,4 +70,5 @@ router.delete('/:id', async (req, res) => {
   
   res.send(screening);
 });
+
 module.exports = router; 

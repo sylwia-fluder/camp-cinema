@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
-  let movie = await Movie.findByIdAndUpdate(
+  const movie = await Movie.findByIdAndUpdate(
     req.params.id,
     pick(req.body, ['title', 'genre', 'ageLimit', 'runningTime', 'movieDescription','direction','cast','production','releaseDate','posterURL']),
     { new: true }
