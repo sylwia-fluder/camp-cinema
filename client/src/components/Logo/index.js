@@ -7,10 +7,7 @@ const Logo = () => {
     return (
         <Link to={ROUTES.HOME} className='logo-box'>
             <img src='logo-img.png'></img>
-            <p>
-                CAMP
-                CINEMA
-            </p>
+            <p>CAMP CINEMA</p>
         </Link>
     )
 };
