@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Home from './pages/Home';
+import MyPayments from './pages/MyPayments';
 import MyTickets from './pages/MyTickets';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
@@ -37,6 +38,7 @@ const App = () => {
                         <Route exact path={ROUTES.HOME} component={Home}/>
                         <Route path={ROUTES.SIGN_IN} component={SignIn}/>
                         <Route path={ROUTES.SIGN_UP} component={SignUp}/>
+                        <PrivateRoute exact path={ROUTES.MY_PAYMENTS} component={MyPayments}/>
                         <PrivateRoute path={ROUTES.MY_TICKETS} component={MyTickets}/>
                     </div>
                 </React.Fragment>
