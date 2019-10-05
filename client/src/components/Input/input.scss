@@ -36,7 +36,16 @@ $color_Error_Placeholder: $radical_red;
   }
 
   &__large {
-    width: 323px;
+    width: 400px;
+  }
+
+  &__inline {
+    display: inline-block;
+  }
+
+  &__center {
+    margin-left: auto;
+    margin-right: auto;
   }
 
   &__error {

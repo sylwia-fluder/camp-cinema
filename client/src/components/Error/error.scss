@@ -9,4 +9,8 @@ $color_Error: $radical_red;
   &::first-letter {
     text-transform: uppercase;
   }
+
+  &__center {
+    text-align: center;
+  }
 }

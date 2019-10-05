@@ -1,28 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import './error.scss';
+import './button.scss';
 
-const Error = (props) => {
+const Button = (props) => {
     const {
         children,
         custom,
     } = props;
 
-    const element = 'error';
-    const errorStyles = classNames({
+    const element = 'btn';
+    const buttonStyles = classNames({
         [`${element}`]: true,
         [`${element}__${custom}`]: custom,
     });
 
     return (
-        <div className={errorStyles}>
+        <button className={buttonStyles} {...props}>
             {children}
-        </div>
+        </button>
     );
 };
 
-Error.propTypes = {
+Button.propTypes = {
     children: PropTypes.node.isRequired,
     custom: PropTypes.oneOf([
         'center',
@@ -30,4 +30,4 @@ Error.propTypes = {
     ]),
 };
 
-export default Error;
+export default Button;

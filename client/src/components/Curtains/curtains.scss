@@ -1,0 +1,28 @@
+$curtain-left: url('/left.png');
+$curtain-right: url('/right.png');
+$height-curtain: 461px;
+$width-curtain: 308px;
+
+.curtains {
+  height: 100%;
+  display: grid;
+  align-items: center;
+
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    height: $height-curtain;
+    width: $width-curtain;
+  }
+
+  &::before {
+    left: 0;
+    background-image: $curtain-left;
+  }
+
+  &::after {
+    right: 0;
+    background-image: $curtain-right;
+  }
+}

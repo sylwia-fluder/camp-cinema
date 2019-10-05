@@ -1,0 +1,43 @@
+@import '../../styles/variables';
+@import '../../styles/functions';
+
+$background_color_under_modal: rgba(0, 0, 0, 0.6);
+$modal_radius: 5px;
+
+.modal {
+  position: fixed;
+  z-index: 1;
+  padding-top: 20vh;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $background_color_under_modal;
+
+  &__body {
+    background-color: $white;
+    border-radius: $modal_radius;
+    margin: auto;
+    padding: 20px;
+    width: 30%;
+    max-height: 60vh;
+    overflow: auto;
+
+    & p {
+      font-size: calculatePxToRem(20px);
+      word-spacing: unset;
+      line-height: unset;
+      font-weight: unset;
+      margin: unset;
+    }
+  }
+
+  &__button {
+    &_close {
+      cursor: pointer;
+      color: $charcoal;
+      display: block;
+      margin: 0 0 0 auto;
+    }
+  }
+}

@@ -9,6 +9,8 @@ import { useAuth } from '../context/auth';
 import Error from '../components/Error';
 import Loading from '../components/Loading';
 import Input from '../components/Input';
+import Button from '../components/Button';
+import Curtains from '../components/Curtains';
 import { ENDPOINTS, ROUTES, HEADER_TOKEN } from '../constants';
 import { headers } from '../helpers';
 
@@ -63,33 +65,40 @@ const SignIn = (props) => {
     if (isLoggedIn) return <Redirect to={referer}/>;
 
     return (
-        <Formik
-            initialValues={SignInModel}
-            validationSchema={SignInSchema}
-            onSubmit={values => postLogin(values)}
-        >
-            <Form>
-                {showLoader && <Loading fixed/>}
-                <Field component={Input}
-                       type='text'
-                       name='email'
-                       placeholder='Email'
-                       size='large'/>
-                <ErrorMessage component={Error}
-                              name='email'/>
-                <Field component={Input}
-                       type='password'
-                       name='password'
-                       placeholder='Password'
-                       size='large'/>
-                <ErrorMessage component={Error}
-                              name='password'/>
-                <button type='submit'
-                        onClick={postLogin}>
-                    Sign In
-                </button>
-            </Form>
-        </Formik>
+        <Curtains>
+            <Formik
+                initialValues={SignInModel}
+                validationSchema={SignInSchema}
+                onSubmit={values => postLogin(values)}
+            >
+                <Form>
+                    {showLoader && <Loading fixed/>}
+                    <Field component={Input}
+                           type='text'
+                           name='email'
+                           placeholder='Email'
+                           size='large'
+                           custom='center'/>
+                    <ErrorMessage component={Error}
+                                  name='email'
+                                  custom='center'/>
+                    <Field component={Input}
+                           type='password'
+                           name='password'
+                           placeholder='Password'
+                           size='large'
+                           custom='center'/>
+                    <ErrorMessage component={Error}
+                                  name='password'
+                                  custom='center'/>
+                    <Button type='submit'
+                            custom='center'
+                            onClick={postLogin}>
+                        Sign In
+                    </Button>
+                </Form>
+            </Formik>
+        </Curtains>
     );
 };
 

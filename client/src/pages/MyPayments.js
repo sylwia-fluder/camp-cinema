@@ -1,16 +1,18 @@
-import React, {useState, useEffect} from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import valid from 'card-validator';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 import * as yup from 'yup';
-import {ErrorMessage, Field, Form, Formik} from 'formik';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Error from '../components/Error';
 import Loading from '../components/Loading';
 import Input from '../components/Input';
-import {ENDPOINTS} from '../constants';
-import {headersWithToken} from '../helpers';
+import Modal from '../components/Modal';
+import Button from '../components/Button';
+import { ENDPOINTS } from '../constants';
+import { headersWithToken } from '../helpers';
+import useToggle from '../components/useToogle';
 
-const PaymentsModel = ({...paymentsData}) => {
+const PaymentsModel = ({ ...paymentsData }) => {
     return {
         name: paymentsData.name || '',
         cardNumber: paymentsData.cardNumber || '',
@@ -51,6 +53,7 @@ const PaymentsSchema = yup.object().shape({
 
 const MyPayments = () => {
     const [showLoader, setShowLoader] = useState(false);
+    const [showModal, setShowModal] = useToggle(false);
     const [paymentsData, setPaymentsData] = useState({});
 
     useEffect(() => {
@@ -83,6 +86,7 @@ const MyPayments = () => {
     const postPayments = (values) => {
         // TODO: change fetch payment
         setShowLoader(true);
+        setShowModal();
 
         fetch(
             ENDPOINTS.PAYMENTS,
@@ -137,21 +141,30 @@ const MyPayments = () => {
                 <Field component={Input}
                        type='text'
                        name='cvv'
+                       custom='inline'
                        placeholder='CVV'
                        size='small'/>
+                <Button type='button'
+                        custom='inline'
+                        onClick={setShowModal}>
+                    Update
+                </Button>
                 <ErrorMessage component={Error}
                               name='cvv'/>
-                <button type='submit'
-                        onClick={postPayments}>
-                    Update
-                </button>
+
+                {showModal && (
+                    <Modal open={showModal} toggle={setShowModal}>
+                        <p>Do you want to save the data?</p>
+                        <Button type='submit'
+                                custom='center'
+                                onClick={postPayments}>
+                            Yes
+                        </Button>
+                    </Modal>
+                )}
             </Form>
         </Formik>
     );
-};
-
-MyPayments.propTypes = {
-    location: PropTypes.object,
 };
 
 export default MyPayments;

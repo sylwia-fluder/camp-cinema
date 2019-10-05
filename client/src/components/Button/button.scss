@@ -1,0 +1,28 @@
+@import '../../styles/variables';
+@import '../../styles/functions';
+
+$text-shadow-button: 4px 0 4px rgba(0, 0, 0, 0.25);
+
+.btn {
+  color: $white;
+  background-color: $radical_red;
+  border: 0;
+  border-radius: $button_radius;
+  font-family: $fontFamily_Base;
+  font-size: calculatePxToRem(25px);
+  font-weight: $fontWeight_Bold;
+  line-height: 1;
+  padding: 13px 24px;
+  text-transform: uppercase;
+  text-shadow: $text-shadow-button;
+
+  &__inline {
+    display: inline-block;
+    margin-left: 140px;
+  }
+
+  &__center {
+    display: block;
+    margin: 60px auto 0;
+  }
+}

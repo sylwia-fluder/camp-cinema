@@ -5,6 +5,8 @@ import { toast } from 'react-toastify';
 import Error from '../components/Error';
 import Loading from '../components/Loading';
 import Input from '../components/Input';
+import Button from '../components/Button';
+import Curtains from '../components/Curtains';
 import { ENDPOINTS } from '../constants';
 import { headers } from '../helpers';
 
@@ -57,40 +59,49 @@ const SignUp = () => {
     };
 
     return (
-        <Formik
-            initialValues={SignUpModel}
-            validationSchema={SignUpSchema}
-            onSubmit={values => postRegister(values)}
-        >
-            <Form>
-                {showLoader && <Loading fixed/>}
-                <Field component={Input}
-                       type='text'
-                       name='email'
-                       placeholder='Email'
-                       size='large'/>
-                <ErrorMessage component={Error}
-                              name='email'/>
-                <Field component={Input}
-                       type='password'
-                       name='password'
-                       placeholder='Password'
-                       size='large'/>
-                <ErrorMessage component={Error}
-                              name='password'/>
-                <Field component={Input}
-                       type='password'
-                       name='passwordConfirm'
-                       placeholder='Password Confirm'
-                       size='large'/>
-                <ErrorMessage component={Error}
-                              name='passwordConfirm'/>
-                <button type='submit'
-                        onClick={postRegister}>
-                    Sign Up
-                </button>
-            </Form>
-        </Formik>
+        <Curtains>
+            <Formik
+                initialValues={SignUpModel}
+                validationSchema={SignUpSchema}
+                onSubmit={values => postRegister(values)}
+            >
+                <Form>
+                    {showLoader && <Loading fixed/>}
+                    <Field component={Input}
+                           type='text'
+                           name='email'
+                           placeholder='Email'
+                           size='large'
+                           custom='center'/>
+                    <ErrorMessage component={Error}
+                                  name='email'
+                                  custom='center'/>
+                    <Field component={Input}
+                           type='password'
+                           name='password'
+                           placeholder='Password'
+                           size='large'
+                           custom='center'/>
+                    <ErrorMessage component={Error}
+                                  name='password'
+                                  custom='center'/>
+                    <Field component={Input}
+                           type='password'
+                           name='passwordConfirm'
+                           placeholder='Password Confirm'
+                           size='large'
+                           custom='center'/>
+                    <ErrorMessage component={Error}
+                                  name='passwordConfirm'
+                                  custom='center'/>
+                    <Button type='submit'
+                            custom='center'
+                            onClick={postRegister}>
+                        Sign Up
+                    </Button>
+                </Form>
+            </Formik>
+        </Curtains>
     );
 };
 
