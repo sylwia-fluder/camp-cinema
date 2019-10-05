@@ -5,8 +5,12 @@ const users = require('./routes/users');
 const screenings = require('./routes/screenings');
 const tickets = require('./routes/tickets');
 const auth = require('./auth/auth');
+const cors = require('cors');
 const app = express();
 
+app.use(cors({
+  exposedHeaders: ['x-auth-token'],
+}));
 
 mongoose.connect('mongodb://localhost/campCinema')
   .then(() => console.log('Connect to DB'))

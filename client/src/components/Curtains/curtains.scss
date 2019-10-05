@@ -4,7 +4,10 @@ $height-curtain: 461px;
 $width-curtain: 308px;
 
 .curtains {
-  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
   display: grid;
   align-items: center;
 
