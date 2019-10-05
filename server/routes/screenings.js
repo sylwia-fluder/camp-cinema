@@ -3,7 +3,7 @@ const {Movie} = require('../models/Movie');
 const pick = require('lodash');
 const express = require('express');
 const router = express.Router();
-const {getScreeningRoom, seatUpdateAsReserved} =require('../controllers/screenings');
+const {getScreeningRoom, seatUpdateAsReserved, checkSeatStatus} =require('../controllers/screenings');
 
 router.get('/', async (req, res) => {
   res.send(await Screening.find().sort('movie.title').sort('date'));
@@ -51,8 +51,29 @@ router.post('/', async (req, res) => {
 router.put('/reservation/:id', async (req, res) => {
   const {error} = validatePlace(req.body);
   if (error) return res.status(400).send(error.details[0].message);
-  
-  res.send(await seatUpdateAsReserved(res, req.params.id, req.body.row, req.body.num));
+
+  try {
+    const screening = await Screening.findById(req.params.id);
+
+    const placeIndex = screening.screeningRoom.findIndex((place) => place.row === req.body.row && place.seatNumber === req.body.num);
+
+    if(placeIndex>-1){
+      const isAvailable = checkSeatStatus(screening.screeningRoom[placeIndex]);
+      if(!isAvailable) return res.status(400).send('seat is already reserved');
+
+      screening.screeningRoom[placeIndex].status='reservation';
+
+      await screening.save();
+
+      res.send(screening.screeningRoom[placeIndex]);
+    }
+    else{
+      return res.status(400).send('place not found');
+    }
+  } catch(error){
+    return res.status(404).send(error.message);
+  }
+
 });
 
 router.put('/:id', async (req, res) => {

@@ -14,19 +14,19 @@ function getScreeningRoom(){
   return screeningRoom;
 }
 
-async function checkSeatStatus(id,row,num){
-  const screening = await Screening.findById(id);
-  return screening.screeningRoom.find((place) => place.rowNumber===row&&place.seatNumber==num).status ==='available';
+function checkSeatStatus(place){
+  return place.status ==='available';
 }
 
 async function seatUpdateAsReserved(res, id, row, num){
-  if(!(await checkSeatStatus(id,row,num))) return res.status(400).send('seat is already reserved');
-
+  
   try {
-    await Screening.update(
+    const isAvailable = await checkSeatStatus(id,row,num);
+    if(!isAvailable) return res.status(400).send('seat is already reserved');
+
+    await Screening.updateOne(
       { '_id': id, 'screeningRoom.rowNumber':row, 'screeningRoom.seatNumber':num},
       {'$set': { 'screeningRoom.$.status': 'reservation' } });
-      
   } catch(error){
     return res.status(404).send(error.message);
   }

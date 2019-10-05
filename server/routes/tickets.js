@@ -64,4 +64,13 @@ router.post('/', async (req, res) => {
   
 });
 
+router.get('/:id', async (req, res) => {
+  const ticket = await Ticket.findById(req.params.id);
+
+  if (!ticket) return res.status(404).send('The ticket with the given ID was not found.');
+
+  res.send(ticket);
+});
+
+
 module.exports = router; 
