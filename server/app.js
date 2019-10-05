@@ -17,7 +17,7 @@ app.use(express.json());
 app.use('/api/movies',movies);
 app.use('/api/users',users);
 app.use('/api/screenings',screenings);
-//app.use('/api/tickets',tickets);
+app.use('/api/tickets',tickets);
 app.use('/api/auth',auth);
 
 const port = process.env.port || 5000;
