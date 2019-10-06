@@ -26,6 +26,10 @@ const Screening = mongoose.model(
           set: v => (v = Math.round(v)),
           max: 18,
           min: 0
+        },
+        posterURL: {
+          type: String,
+          maxlength: 255
         }
       }),
       required:true,

@@ -37,7 +37,8 @@ router.post('/', async (req, res) => {
       _id: movie._id,
       title: movie.title,
       genre: movie.genre,
-      ageLimit: movie.ageLimit
+      ageLimit: movie.ageLimit,
+      posterURL: movie.posterURL
     },
     priceNormalTicket: req.body.priceNormalTicket,
     typeOfScreening: req.body.typeOfScreening,

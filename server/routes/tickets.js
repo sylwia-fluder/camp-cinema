@@ -35,7 +35,8 @@ router.post('/', async (req, res) => {
     },
     screening: {
       movieTitle: screening.movie.title,
-      date: screening.date
+      date: screening.date,
+      screeningPosterURL: screening.movie.posterURL
     },
     price: req.body.price,
     isReduction: req.body.isReduction,

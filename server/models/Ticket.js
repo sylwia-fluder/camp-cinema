@@ -34,6 +34,10 @@ const Ticket = mongoose.model('Ticket', new mongoose.Schema({
       date: {
         type:Date,
         required: true,
+      },
+      screeningPosterURL: {
+        type: String,
+        maxlength: 255
       }
     }),
     required: true
