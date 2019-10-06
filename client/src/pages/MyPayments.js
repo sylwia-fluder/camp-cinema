@@ -8,10 +8,10 @@ import Loading from '../components/Loading';
 import Input from '../components/Input';
 import Modal from '../components/Modal';
 import Button from '../components/Button';
+import MenuUser from '../components/MenuUser';
 import { ENDPOINTS } from '../constants';
 import { headersWithToken } from '../helpers';
 import useToggle from '../components/useToogle';
-import MenuUser from "../components/MenuUser";
 
 const PaymentsModel = ({ ...paymentsData }) => {
     return {

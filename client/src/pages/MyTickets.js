@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 import shortid from 'shortid';
-import { ENDPOINTS } from "../constants";
-import { headersWithToken } from "../helpers";
-import Loading from "../components/Loading";
-import MenuUser from "../components/MenuUser";
-import Ticket from "../components/Ticket";
+import { ENDPOINTS } from '../constants';
+import { headersWithToken } from '../helpers';
+import Loading from '../components/Loading';
+import MenuUser from '../components/MenuUser';
+import Ticket from '../components/Ticket';
+import EmptyList from '../components/EmptyList';
 
 const MyTickets = () => {
     const [showLoader, setShowLoader] = useState(false);
@@ -40,7 +41,7 @@ const MyTickets = () => {
         <MenuUser>
             {showLoader && <Loading fixed/>}
             {showTickets.length === 0 ?
-                <div>You don't have tickets</div> :
+                <EmptyList>You don't have tickets</EmptyList> :
                 showTickets.map(ticket => <Ticket key={shortid} data={ticket}/>)
             }
         </MenuUser>
