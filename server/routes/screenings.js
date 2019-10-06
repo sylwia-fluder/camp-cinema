@@ -7,7 +7,8 @@ const {validateSeat} = require('../models/Seat');
 const {getScreeningRoom, seatUpdateAsReserved} = require('../controllers/screenings');
 
 router.get('/', async (req, res) => {
-  res.send(await Screening.find().sort('movie.title').sort('date'));
+  const screening = await Screening.find().sort('movie.title').sort('date');
+  res.send(screening);
 });
 
 router.get('/:id', async (req, res) => {
@@ -31,7 +32,7 @@ router.post('/', async (req, res) => {
   const movie = await Movie.findById(req.body.movieId);
   if (!movie)
     return res.status(404).send('The movie with given ID is not found!');
-  let screening = new Screening({
+  const screening = new Screening({
     movie: {
       _id: movie._id,
       title: movie.title,
@@ -44,9 +45,9 @@ router.post('/', async (req, res) => {
     date: req.body.date,
     screeningRoom: getScreeningRoom(),
   });
-  screening = await screening.save();
+  const screeningSaved= await screening.save();
 
-  res.send(screening);
+  res.send(screeningSaved);
 });
 
 router.put('/reservation/:id', async (req, res) => {

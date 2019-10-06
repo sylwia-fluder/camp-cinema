@@ -22,10 +22,10 @@ router.post('/', async (req, res) => {
   const place = await screening.screeningRoom.find((place) => place.row === req.body.row && place.seatNumber === req.body.seatNumber);
   if(place.status === 'reservation') return res.status(400).send('seat is already reserved');
 
-  let user =  await User.findById(req.body.userId);
+  const user =  await User.findById(req.body.userId);
   if(req.body.userId && !user) return res.status(400).send('The user with the given ID was not found.');
 
-  let ticket = new Ticket({ 
+  const ticket = new Ticket({ 
     customer: {
       name: req.body.customerName,
       email: req.body.customerEmail,
