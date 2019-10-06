@@ -8,6 +8,7 @@ import Loading from '../components/Loading';
 import Input from '../components/Input';
 import Modal from '../components/Modal';
 import Button from '../components/Button';
+import MenuUser from '../components/MenuUser';
 import { ENDPOINTS } from '../constants';
 import { headersWithToken } from '../helpers';
 import useToggle from '../components/useToogle';
@@ -109,61 +110,63 @@ const MyPayments = () => {
     };
 
     return (
-        <Formik
-            enableReinitialize
-            initialValues={PaymentsModel(paymentsData)}
-            validationSchema={PaymentsSchema}
-            onSubmit={values => postPayments(values)}
-        >
-            <Form>
-                {showLoader && <Loading fixed/>}
-                <Field component={Input}
-                       type='text'
-                       name='name'
-                       placeholder='Name'
-                       size='large'/>
-                <ErrorMessage component={Error}
-                              name='name'/>
-                <Field component={Input}
-                       type='text'
-                       name='cardNumber'
-                       placeholder='Card number'
-                       size='large'/>
-                <ErrorMessage component={Error}
-                              name='cardNumber'/>
-                <Field component={Input}
-                       type='text'
-                       name='expirationDate'
-                       placeholder='Expiration date'
-                       size='medium'/>
-                <ErrorMessage component={Error}
-                              name='expirationDate'/>
-                <Field component={Input}
-                       type='text'
-                       name='cvv'
-                       custom='inline'
-                       placeholder='CVV'
-                       size='small'/>
-                <Button type='button'
-                        custom='inline'
-                        onClick={setShowModal}>
-                    Update
-                </Button>
-                <ErrorMessage component={Error}
-                              name='cvv'/>
+        <MenuUser>
+            <Formik
+                enableReinitialize
+                initialValues={PaymentsModel(paymentsData)}
+                validationSchema={PaymentsSchema}
+                onSubmit={values => postPayments(values)}
+            >
+                <Form>
+                    {showLoader && <Loading fixed/>}
+                    <Field component={Input}
+                           type='text'
+                           name='name'
+                           placeholder='Name'
+                           size='large'/>
+                    <ErrorMessage component={Error}
+                                  name='name'/>
+                    <Field component={Input}
+                           type='text'
+                           name='cardNumber'
+                           placeholder='Card number'
+                           size='large'/>
+                    <ErrorMessage component={Error}
+                                  name='cardNumber'/>
+                    <Field component={Input}
+                           type='text'
+                           name='expirationDate'
+                           placeholder='Expiration date'
+                           size='medium'/>
+                    <ErrorMessage component={Error}
+                                  name='expirationDate'/>
+                    <Field component={Input}
+                           type='text'
+                           name='cvv'
+                           custom='inline'
+                           placeholder='CVV'
+                           size='small'/>
+                    <Button type='button'
+                            custom='inline'
+                            onClick={setShowModal}>
+                        Update
+                    </Button>
+                    <ErrorMessage component={Error}
+                                  name='cvv'/>
 
-                {showModal && (
-                    <Modal open={showModal} toggle={setShowModal}>
-                        <p>Do you want to save the data?</p>
-                        <Button type='submit'
-                                custom='center'
-                                onClick={postPayments}>
-                            Yes
-                        </Button>
-                    </Modal>
-                )}
-            </Form>
-        </Formik>
+                    {showModal && (
+                        <Modal open={showModal} toggle={setShowModal}>
+                            <p>Do you want to save the data?</p>
+                            <Button type='submit'
+                                    custom='center'
+                                    onClick={postPayments}>
+                                Yes
+                            </Button>
+                        </Modal>
+                    )}
+                </Form>
+            </Formik>
+        </MenuUser>
     );
 };
 

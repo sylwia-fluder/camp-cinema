@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
+import { get } from 'lodash';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
@@ -7,7 +10,8 @@ import Loading from '../components/Loading';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import Curtains from '../components/Curtains';
-import { ENDPOINTS } from '../constants';
+import { ENDPOINTS, HEADER_TOKEN, ROUTES } from '../constants';
+import { useAuth } from '../context/auth';
 import { headers } from '../helpers';
 
 const SignUpModel = {
@@ -32,24 +36,32 @@ const SignUpSchema = yup.object().shape({
         .required('password confirm is required'),
 });
 
-const SignUp = () => {
+const SignUp = (props) => {
+    const { authTokens, setAuthTokens } = useAuth();
+    const [isLoggedIn, setLoggedIn] = useState(authTokens);
     const [showLoader, setShowLoader] = useState(false);
 
+    const referer = get(props.location, 'state.referer.pathname', ROUTES.MY_TICKETS);
+
     const postRegister = (values) => {
-        // TODO: change fetch register
         setShowLoader(true);
 
         fetch(
             ENDPOINTS.SIGN_UP,
             {
                 method: 'POST',
-                body: values,
-                headers: headers,
+                body: JSON.stringify({
+                    email: values.email,
+                    password: values.password,
+                }),
+                headers: headers(),
             }
         ).then(response => {
             if (!response.ok) {
                 throw new Error('Not 200 response');
             } else {
+                setAuthTokens(response.headers.get(HEADER_TOKEN));
+                setLoggedIn(true);
                 toast.success('The user has been added');
             }
         }).catch(() => {
@@ -57,6 +69,8 @@ const SignUp = () => {
             toast.error('Something went wrong...');
         });
     };
+
+    if (isLoggedIn) return <Redirect to={referer}/>;
 
     return (
         <Curtains>
@@ -95,14 +109,17 @@ const SignUp = () => {
                                   name='passwordConfirm'
                                   custom='center'/>
                     <Button type='submit'
-                            custom='center'
-                            onClick={postRegister}>
+                            custom='center'>
                         Sign Up
                     </Button>
                 </Form>
             </Formik>
         </Curtains>
     );
+};
+
+SignUp.propTypes = {
+    location: PropTypes.object,
 };
 
 export default SignUp;

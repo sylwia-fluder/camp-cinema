@@ -6,7 +6,7 @@ import './logo.scss';
 const Logo = () => {
     return (
         <Link to={ROUTES.HOME} className='logo-box'>
-            <img className='logo-img' src='logo-img.png'></img>
+            <img className='logo-img' src='logo-img.png' alt='logo'/>
             <p className='logo-text'>CAMP CINEMA</p>
         </Link>
     )

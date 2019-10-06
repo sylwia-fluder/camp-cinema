@@ -20,7 +20,10 @@ export const TOAST_OPTIONS = {
 };
 
 const App = () => {
-    const [authTokens, setAuthTokens] = useState();
+    const localStorageToken = localStorage.getItem(STORAGE_NAMES.TOKEN);
+    const [authTokens, setAuthTokens] = useState(
+        localStorageToken === 'undefined' || localStorageToken === null ? '' : localStorageToken
+    );
 
     const setTokens = (data) => {
         localStorage.setItem(STORAGE_NAMES.TOKEN, JSON.stringify(data));
