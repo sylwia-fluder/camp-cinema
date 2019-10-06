@@ -7,7 +7,7 @@ const Ticket = (props) => {
         data: {
             screening: {
                 movieTitle,
-                posterURL,
+                screeningPosterURL,
                 date,
             },
             place: {
@@ -25,7 +25,7 @@ const Ticket = (props) => {
 
     return (
         <div className='ticket'>
-            {posterURL && <img className='ticket__poster' src={posterURL} alt={movieTitle}/>}
+            {screeningPosterURL && <img className='ticket__poster' src={screeningPosterURL} alt={movieTitle}/>}
             <div className='ticket__info'>
                 <p>{movieTitle}</p>
                 <p>{dateTicket}</p>
