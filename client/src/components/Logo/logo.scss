@@ -18,13 +18,13 @@ $font-weight-logo: $fontWeight_Bold;
     border-radius: 0 0 20px 0;
 }
 
-img {
+.logo-img {
     height: 85px;
     fill: $text-color;
     margin: 0 5px;
 }
 
-p {
+.logo-text {
     word-spacing: 100vw; 
     font-size: $font-size-logo;
     font-weight: $font-weight-logo;
