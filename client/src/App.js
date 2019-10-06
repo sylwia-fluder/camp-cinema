@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Home from './pages/Home';
 import MyTickets from './pages/MyTickets';
-import SingIn from './pages/SingIn';
+import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import Navbar from './components/Navbar'
 import PrivateRoute from './PrivateRoute';
 import { AuthContext } from './context/auth';
 import { ROUTES, STORAGE_NAMES } from './constants';
@@ -26,25 +27,18 @@ const App = () => {
     };
 
     return (
+        
         <AuthContext.Provider value={{authTokens, setAuthTokens: setTokens}}>
             <Router>
                 <React.Fragment>
                     <ToastContainer {...TOAST_OPTIONS}/>
-                    <ul>
-                        <li>
-                            <Link to={ROUTES.HOME}>Home Page</Link>
-                        </li>
-                        <li>
-                            <Link to={ROUTES.SIGN_IN}>Sing In</Link>
-                        </li>
-                        <li>
-                            <Link to={ROUTES.SING_UP}>Sing up</Link>
-                        </li>
-                    </ul>
-                    <Route exact path={ROUTES.HOME} component={Home}/>
-                    <Route path={ROUTES.SIGN_IN} component={SingIn}/>
-                    <Route path={ROUTES.SING_UP} component={SignUp}/>
-                    <PrivateRoute path={ROUTES.MY_TICKETS} component={MyTickets}/>
+                    <Navbar />
+                    <div className='content'>
+                        <Route exact path={ROUTES.HOME} component={Home}/>
+                        <Route path={ROUTES.SIGN_IN} component={SignIn}/>
+                        <Route path={ROUTES.SIGN_UP} component={SignUp}/>
+                        <PrivateRoute path={ROUTES.MY_TICKETS} component={MyTickets}/>
+                    </div>
                 </React.Fragment>
             </Router>
         </AuthContext.Provider>

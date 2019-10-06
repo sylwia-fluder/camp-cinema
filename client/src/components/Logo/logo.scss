@@ -1,0 +1,33 @@
+@import '../../styles/variables';
+@import '../../styles/functions';
+
+$text-color: $radical_red;
+$logo-box-color: $gray-white;
+$font-size-logo: calculatePxToRem(30px);
+$font-weight-logo: $fontWeight_Bold;
+
+.logo-box {
+    display: flex;
+    text-decoration: none;
+    background-color: $logo-box-color;
+    color: $text-color;
+    //height: 85px;
+    align-items: center;
+    width: 18vw;
+    padding: 5px;
+    border-radius: 0 0 20px 0;
+}
+
+.logo-img {
+    height: 85px;
+    fill: $text-color;
+    margin: 0 5px;
+}
+
+.logo-text {
+    word-spacing: 100vw; 
+    font-size: $font-size-logo;
+    font-weight: $font-weight-logo;
+    line-height: 35px;
+    margin: 0 5px;
+}

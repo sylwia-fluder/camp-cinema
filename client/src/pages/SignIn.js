@@ -29,7 +29,7 @@ const SignInSchema = yup.object().shape({
         .required(),
 });
 
-const SingIn = (props) => {
+const SignIn = (props) => {
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [showLoader, setShowLoader] = useState(false);
 
@@ -41,7 +41,7 @@ const SingIn = (props) => {
         setShowLoader(true);
 
         fetch(
-            ENDPOINTS.SING_IN,
+            ENDPOINTS.SIGN_IN,
             {
                 method: 'POST',
                 body: values,
@@ -93,8 +93,8 @@ const SingIn = (props) => {
     );
 };
 
-SingIn.propTypes = {
+SignIn.propTypes = {
     location: PropTypes.object,
 };
 
-export default SingIn;
+export default SignIn;

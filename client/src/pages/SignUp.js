@@ -38,7 +38,7 @@ const SignUp = () => {
         setShowLoader(true);
 
         fetch(
-            ENDPOINTS.SING_UP,
+            ENDPOINTS.SIGN_UP,
             {
                 method: 'POST',
                 body: values,
