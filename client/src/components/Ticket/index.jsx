@@ -5,11 +5,15 @@ import './ticket.scss';
 const Ticket = (props) => {
     const {
         data: {
-            posterURL,
-            movieTitle,
-            date,
-            row,
-            seatNumber,
+            screening: {
+                movieTitle,
+                posterURL,
+                date,
+            },
+            place: {
+                rowNumber,
+                seatNumber,
+            },
         },
     } = props;
 
@@ -29,7 +33,7 @@ const Ticket = (props) => {
             </div>
             <div className='ticket__container'>
                 <div className='ticket__seat'>
-                    <p>R: {row}</p>
+                    <p>R: {rowNumber}</p>
                     <p>S: {seatNumber}</p>
                 </div>
                 <div className='ticket__qrcode'/>

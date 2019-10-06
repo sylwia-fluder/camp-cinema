@@ -42,7 +42,7 @@ const MyTickets = () => {
             {showLoader && <Loading fixed/>}
             {showTickets.length === 0 ?
                 <EmptyList>You don't have tickets</EmptyList> :
-                showTickets.map(ticket => <Ticket key={shortid} data={ticket}/>)
+                showTickets.map(ticket => <Ticket key={shortid.generate()} data={ticket}/>)
             }
         </MenuUser>
     );
