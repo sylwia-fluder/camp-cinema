@@ -35,8 +35,9 @@ li {
 }
 
 .sign-in {
-    padding-left: $link-gap;
+    cursor: pointer;
     border-left: 2px solid $text-color;
+    padding-left: $link-gap;
 }
 
 
