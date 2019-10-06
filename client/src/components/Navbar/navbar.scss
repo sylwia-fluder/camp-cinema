@@ -6,7 +6,7 @@ $text-color: $white;
 $link-gap: 20px;
 $font-size-nav: calculatePxToRem(25px);
 
-nav {
+.navbar-box {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -25,7 +25,7 @@ nav {
     align-self: flex-start;
 }
 
-li {
+.navbar-item {
     margin-left: $link-gap;
 }
 
