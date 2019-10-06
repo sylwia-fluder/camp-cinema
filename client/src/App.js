@@ -20,7 +20,7 @@ export const TOAST_OPTIONS = {
 };
 
 const App = () => {
-    const [authTokens, setAuthTokens] = useState();
+    const [authTokens, setAuthTokens] = useState(localStorage.getItem(STORAGE_NAMES.TOKEN) || '');
 
     const setTokens = (data) => {
         localStorage.setItem(STORAGE_NAMES.TOKEN, JSON.stringify(data));
@@ -28,7 +28,7 @@ const App = () => {
     };
 
     return (
-        
+
         <AuthContext.Provider value={{authTokens, setAuthTokens: setTokens}}>
             <Router>
                 <React.Fragment>

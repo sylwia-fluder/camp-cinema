@@ -29,7 +29,8 @@ body {
   background-color: $content-color;
   position: relative;
   top: 100px;
-  height: 350px;
+  min-height: 429px;
+  padding-bottom: 25px;
   box-shadow: $box-shadow;
 }
 

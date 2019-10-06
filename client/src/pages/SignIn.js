@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
-import get from 'lodash';
+import { get } from 'lodash';
 import * as yup from 'yup';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useAuth } from '../context/auth';
@@ -32,22 +32,24 @@ const SignInSchema = yup.object().shape({
 });
 
 const SignIn = (props) => {
-    const [isLoggedIn, setLoggedIn] = useState(false);
-    const [showLoader, setShowLoader] = useState(false);
+    const { authTokens, setAuthTokens } = useAuth();
 
-    const {setAuthTokens} = useAuth();
-    const referer = get(props.location, 'state.referer', ROUTES.MY_TICKETS);
+    const [isLoggedIn, setLoggedIn] = useState(authTokens);
+    const [showLoader, setShowLoader] = useState(false);
+    const referer = get(props.location, 'state.referer.pathname', ROUTES.MY_TICKETS);
 
     const postLogin = (values) => {
-        // TODO: change fetch login
         setShowLoader(true);
 
         fetch(
             ENDPOINTS.SIGN_IN,
             {
                 method: 'POST',
-                body: values,
-                headers: headers,
+                body: JSON.stringify({
+                    email: values.email,
+                    password: values.password,
+                }),
+                headers: headers(),
             }
         ).then(response => {
             if (!response.ok) {
@@ -92,8 +94,7 @@ const SignIn = (props) => {
                                   name='password'
                                   custom='center'/>
                     <Button type='submit'
-                            custom='center'
-                            onClick={postLogin}>
+                            custom='center'>
                         Sign In
                     </Button>
                 </Form>

@@ -1,5 +1,6 @@
 export const ENDPOINTS = {
-    SIGN_IN: 'http://localhost:3000/api/users',
-    SIGN_UP: 'http://localhost:3000/api/auth',
-    PAYMENTS: 'http://localhost:3000/api/payments',
+    SIGN_IN: 'http://localhost:5000/api/auth',
+    SIGN_UP: 'http://localhost:5000/api/users',
+    PAYMENTS: 'http://localhost:5000/api/payments',
+    MY_TICKETS: 'http://localhost:5000/api/users/user',
 };
