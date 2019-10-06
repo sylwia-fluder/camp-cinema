@@ -1,8 +1,9 @@
-const {Screening, validate} = require('../models/Screening');
+const {Screening, validate, validatePlace} = require('../models/Screening');
 const {Movie} = require('../models/Movie');
 const pick = require('lodash');
 const express = require('express');
 const router = express.Router();
+const {getScreeningRoom, seatUpdateAsReserved, checkSeatStatus} =require('../controllers/screenings');
 
 router.get('/', async (req, res) => {
   res.send(await Screening.find().sort('movie.title').sort('date'));
@@ -40,14 +41,43 @@ router.post('/', async (req, res) => {
     typeOfScreening: req.body.typeOfScreening,
     language: req.body.language,
     date: req.body.date,
+    screeningRoom: getScreeningRoom(),
   });
   screening = await screening.save();
 
   res.send(screening);
 });
 
+router.put('/reservation/:id', async (req, res) => {
+  const {error} = validatePlace(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  try {
+    const screening = await Screening.findById(req.params.id);
+
+    const placeIndex = screening.screeningRoom.findIndex((place) => place.row === req.body.row && place.seatNumber === req.body.num);
+
+    if(placeIndex>-1){
+      const isAvailable = checkSeatStatus(screening.screeningRoom[placeIndex]);
+      if(!isAvailable) return res.status(400).send('seat is already reserved');
+
+      screening.screeningRoom[placeIndex].status='reservation';
+
+      await screening.save();
+
+      res.send(screening.screeningRoom[placeIndex]);
+    }
+    else{
+      return res.status(400).send('place not found');
+    }
+  } catch(error){
+    return res.status(404).send(error.message);
+  }
+
+});
+
 router.put('/:id', async (req, res) => {
-  let screening = await Screening.findByIdAndUpdate(
+  const screening = await Screening.findByIdAndUpdate(
     req.params.id,
     pick(req.body, ['priceNormalTicket','typeOfScreening','language','date']),{ new: true });
   if (!screening) return res.status(404).send('The screening with given ID is not found!');
@@ -61,4 +91,5 @@ router.delete('/:id', async (req, res) => {
   
   res.send(screening);
 });
+
 module.exports = router; 

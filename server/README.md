@@ -44,12 +44,18 @@ Endpoints:
                 language: string            (enum -> ['PL','EN (SUB PL)', 'DUB PL','Original', 'Original (SUB PL)']),
                 date: Date,
             }
+        Put - set status as reserved   -> /api/screenings/reservation/:id       (in repair!!!)
+
+            Body {
+                row: Number
+                num: Number
+            }
     User: 
         Get my tickets                 -> /api/users/user
         Post - registration            -> /api/users
 
             Body {
-                name: string                
+                name: string                (optional)
                 phone: string               (optional)
                 email: string
                 password: string
@@ -62,4 +68,28 @@ Endpoints:
                 email: string
                 password: string
             }
+
+    Ticket:                                             (in repair!!! without test)
+
+        Get all tickets                 -> /api/tickets
+        Get ticket by id                -> /api/screenings/:id
+
+        Post - buy ticket               -> /api/tickets
+
+            Body {
+                screeningId: objectId,
+                customerName: string,
+                customerEmail: email,
+                userId:  objectId,          (optional)
+                price: number,
+                isReduction: boolean,       (optional)
+                rowNumber: number,
+                seatNumber: number,
+            }
+        
+        
+
+
+
+
     

@@ -49,6 +49,10 @@ const Screening = mongoose.model(
     date: {
       type:Date,
       required: true,
+    },
+    screeningRoom:{
+      type:Array,
+      required:true
     }
   })
 );
@@ -65,5 +69,15 @@ function validateScreening(screening) {
   return Joi.validate(screening, schema);
 }
 
+function validatePlace(place) {
+  const schema = {
+    row:  Joi.number().required().min(1).max(9),
+    num:  Joi.number().required().min(1).max(14),
+  };
+
+  return Joi.validate(place, schema);
+}
+
 exports.Screening = Screening;
+exports.validatePlace = validatePlace;
 exports.validate = validateScreening;

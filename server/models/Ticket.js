@@ -1,5 +1,6 @@
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 const mongoose = require('mongoose');
+const userSchema = require('../models/User');
 
 const Ticket = mongoose.model('Ticket', new mongoose.Schema({
   customer: { 
@@ -15,7 +16,10 @@ const Ticket = mongoose.model('Ticket', new mongoose.Schema({
         required: true,
         minlength: 5,
         maxlength: 50
-      }      
+      } ,
+      user: {
+        type: userSchema
+      }     
     }),  
     required: true
   },
@@ -46,7 +50,7 @@ const Ticket = mongoose.model('Ticket', new mongoose.Schema({
   },
   place: { 
     type: new mongoose.Schema({
-      row: {
+      rowNumber: {
         type: Number,
         required: true,
         minlength: 0,
@@ -68,10 +72,11 @@ function validateTicket(ticket) {
     screeningId: Joi.objectId().required(),
     customerName: Joi.string().min(5).max(50).required(),
     customerEmail: Joi.string().min(5).max(255).required().email(),
-    price: Joi.number().require(),
+    userId:  Joi.objectId(),
+    price: Joi.number().required(),
     isReduction: Joi.boolean(),
-    row: Joi.number().integer().require().min(0).max(20),
-    seatNumber: Joi.number().integer().require().min(0).max(20),
+    rowNumber: Joi.number().integer().required().min(0).max(20),
+    seatNumber: Joi.number().integer().required().min(0).max(20),
   };
 
   return Joi.validate(ticket, schema);
