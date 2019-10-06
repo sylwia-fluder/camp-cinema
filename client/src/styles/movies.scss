@@ -1,0 +1,53 @@
+@import 'variables';
+@import 'functions';
+
+$text-color: $white;
+
+.carousel{
+    justify-content: center;
+    position: relative;
+}
+
+.alice-carousel__stage-item {
+
+    text-align: center;
+}
+
+.carousel-button {
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    //display: block;
+    border-radius: 50%;
+    background-color: white;
+    height: 40px;
+    width: 40px;
+    z-index: 2;
+    position: absolute;
+    top: 50%;
+    background-image: url('/arrow-button.png');
+    background-size: cover;
+    opacity: 0.5;
+}
+
+.next {
+    right: 0px;
+    margin-right: 10px;
+}
+
+.prev {
+    margin-left: 10px;
+    transform: rotate(180deg);
+}
+
+.alice-carousel__wrapper {
+    z-index: 1
+}
+
+.day {
+    color: $text-color;
+    padding: 7px;
+    padding-left: 20px;
+    font-size: calculatePxToRem(30px)
+    //position: absolute;
+}

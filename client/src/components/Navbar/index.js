@@ -6,7 +6,7 @@ import "./navbar.scss";
 
 const Navbar = () => {
   const links = [
-    <Link className="nav-link">MOVIES</Link>,
+    <Link to={ROUTES.MOVIES} className="nav-link">MOVIES</Link>,
     <Link className="nav-link">EVENTS</Link>,
     <Link className="nav-link">MEMBERSHIP</Link>,
     <Link to={ROUTES.SIGN_IN} className="nav-link sign-in">SIGN IN</Link>,
