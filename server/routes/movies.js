@@ -4,7 +4,8 @@ const {Movie, validate} = require('../models/Movie');
 const router = Router();
 
 router.get('/', async (req, res) => {
-  res.send(await Movie.find().sort('title'));
+  const movie = await Movie.find().sort('title');
+  res.send(movie);
 });
 
 router.get('/:id', async (req, res) => {
@@ -23,7 +24,7 @@ router.post('/', async (req, res) => {
   const { error } = validate(req.body); 
   if (error) return res.status(400).send(error.details[0].message);
   
-  let movie = new Movie({
+  const movie = new Movie({
     title: req.body.title,
     genre: req.body.genre,
     ageLimit: req.body.ageLimit,
@@ -36,9 +37,9 @@ router.post('/', async (req, res) => {
     posterURL: req.body.posterURL
   });
 
-  movie = await movie.save();
+  const movieSaved = await movie.save();
 
-  res.send(movie);
+  res.send(movieSaved);
 });
 
 router.put('/:id', async (req, res) => {

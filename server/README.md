@@ -44,7 +44,7 @@ Endpoints:
                 language: string            (enum -> ['PL','EN (SUB PL)', 'DUB PL','Original', 'Original (SUB PL)']),
                 date: Date,
             }
-        Put - set status as reserved   -> /api/screenings/reservation/:id       (in repair!!!)
+        Put - set status as reserved   -> /api/screenings/reservation/:id    
 
             Body {
                 row: Number
@@ -69,7 +69,7 @@ Endpoints:
                 password: string
             }
 
-    Ticket:                                             (in repair!!! without test)
+    Ticket:                                           
 
         Get all tickets                 -> /api/tickets
         Get ticket by id                -> /api/screenings/:id

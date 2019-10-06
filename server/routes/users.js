@@ -22,9 +22,15 @@ router.post('/', async (req, res) => {
   user.password = await bcryptjs.hash(user.password, salt);
   await user.save();
 
-  const token = user.generateAuthToken();
+  try {
+
+    const token = user.generateAuthToken();
   
-  res.header('x-auth-token', token).send(_.pick(user, ['_id', 'name', 'email','phone']));
+    res.header('x-auth-token', token).send(_.pick(user, ['_id', 'name', 'email','phone']));
+    
+  } catch(error) {
+    return res.status(500).send('Something failed.');
+  }
 });
 
 module.exports = router; 
