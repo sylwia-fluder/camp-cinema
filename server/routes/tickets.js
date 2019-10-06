@@ -1,14 +1,11 @@
 const {Ticket, validate} = require('../models/Ticket'); 
 const {Screening} = require('../models/Screening'); 
 const {User} = require('../models/User'); 
-const {checkSeatStatus, seatUpdateAsReserved} = require('../controllers/screenings');
+const {seatUpdateAsReserved} = require('../controllers/screenings');
 const {sentTicketToUserDate} = require('../controllers/tickets');
-const mongoose = require('mongoose');
-const Fawn = require('fawn');
 const express = require('express');
 const router = express.Router();
 
-//Fawn.init(mongoose);
 
 router.get('/', async (req, res) => {
   const tickets = await Ticket.find().sort('movie.title').sort('screening.date');
@@ -22,10 +19,11 @@ router.post('/', async (req, res) => {
   const screening = await Screening.findById(req.body.screeningId);
   if (!screening) return res.status(400).send('Invalid screening.');
 
-  if(!(await checkSeatStatus(req.body.screeningId, req.body.rowNumber, req.body.seatNumber))) return res.status(400).send('Seat already reserved');
-  
+  const place = await screening.screeningRoom.find((place) => place.row === req.body.row && place.seatNumber === req.body.seatNumber);
+  if(place.status === 'reservation') return res.status(400).send('seat is already reserved');
+
   let user =  await User.findById(req.body.userId);
-  if(req.body.userId&&!user) return res.status(400).send('The user with the given ID was not found.');
+  if(req.body.userId && !user) return res.status(400).send('The user with the given ID was not found.');
 
   let ticket = new Ticket({ 
     customer: {
@@ -42,26 +40,14 @@ router.post('/', async (req, res) => {
     price: req.body.price,
     isReduction: req.body.isReduction,
     place:{
-      rowNumber: req.body.rowNumber,
+      row: req.body.row,
       seatNumber:req.body.seatNumber
     }
   });
-
+  await ticket.save();
   
-  /*await new Fawn.Task()
-    .save('tickets', ticket)
-    .update('screenings', { _id: req.body.screeningId, 'screeningRoom.row' : req.body.row, 'screeningRoom.seatNumber':req.body.seatNumber }, 
-      { '$set': {'screeningRoom.$.status': 'reserved' }})
-    .run()
-    .then(console.log(screening.screeningRoom.find(place => place.row === req.body.row&&place.seatNumber === req.body.seatNumber)));
-   */ 
-
-  
-  await seatUpdateAsReserved(res, req.body.screeningId, req.body.rowNumber, req.body.seatNumber);
   await sentTicketToUserDate(req.body.userId,ticket);
-  
-  res.send(screening);
-  
+  await seatUpdateAsReserved(res, req.body.screeningId, req.body.row, req.body.seatNumber);
 });
 
 router.get('/:id', async (req, res) => {

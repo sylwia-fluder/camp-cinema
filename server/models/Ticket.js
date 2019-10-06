@@ -50,7 +50,7 @@ const Ticket = mongoose.model('Ticket', new mongoose.Schema({
   },
   place: { 
     type: new mongoose.Schema({
-      rowNumber: {
+      row: {
         type: Number,
         required: true,
         minlength: 0,
@@ -75,7 +75,7 @@ function validateTicket(ticket) {
     userId:  Joi.objectId(),
     price: Joi.number().required(),
     isReduction: Joi.boolean(),
-    rowNumber: Joi.number().integer().required().min(0).max(20),
+    row: Joi.number().integer().required().min(0).max(20),
     seatNumber: Joi.number().integer().required().min(0).max(20),
   };
 
