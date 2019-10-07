@@ -5,6 +5,7 @@ import './input.scss';
 
 const Input = (props) => {
     const {
+        custom,
         field,
         form,
         size,
@@ -13,6 +14,7 @@ const Input = (props) => {
     const element = 'input';
     const inputStyles = classNames({
         [`${element}`]: true,
+        [`${element}__${custom}`]: custom,
         [`${element}__${size}`]: true,
         [`${element}__error`]: form.errors[field.name] && form.touched[field.name],
     });
@@ -23,12 +25,16 @@ const Input = (props) => {
 };
 
 Input.propTypes = {
+    custom: PropTypes.oneOf([
+        'center',
+        'inline',
+    ]),
     field: PropTypes.object,
     form: PropTypes.object,
     size: PropTypes.oneOf([
         'small',
         'medium',
-        'large'
+        'large',
     ]),
 };
 

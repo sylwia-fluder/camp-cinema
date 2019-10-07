@@ -1,0 +1,102 @@
+@import '../../styles/variables';
+@import '../../styles/functions';
+
+$box-shadow-text: 4px 0 4px rgba(0, 0, 0, 0.25);
+$box-shadow-img: 4px 0 4px rgba(0, 0, 0, 0.25);
+$box-shadow-ticket: 4px 0 4px rgba(0, 0, 0, 0.25);
+$border-radius-qrcode: 10px;
+$query: url('/qrcode.png');
+
+.ticket {
+  background-color: $dark_radical_red;
+  border-radius: 5px;
+  color: $white;
+  display: flex;
+  font-weight: $fontWeight_Bold;
+  font-size: calculatePxToRem(25px);
+  max-width: 471px;
+  padding: 20px;
+  text-shadow: $box-shadow-text;
+  box-shadow: $box-shadow-ticket;
+
+  & ~ & {
+    margin-top: 17px;
+  }
+
+  &__info {
+    display: flex;
+
+    & p ~ p {
+      margin-top: 0;
+      margin-left: 60px;
+    }
+  }
+
+  &__container, &__poster {
+    display: none;
+  }
+
+  &__container {
+    margin-left: 35px;
+  }
+
+  &__poster {
+    height: 118px;
+    width: 90px;
+    border-radius: 20px;
+    margin-right: 15px;
+    box-shadow: $box-shadow-img;
+  }
+
+  &__seat {
+    flex-direction: row;
+
+    & p ~ p {
+      margin-left: 30px;
+    }
+  }
+
+  .ticket__qrcode {
+    align-self: center;
+    background-color: $white;
+    background-image: $query;
+    border: 7px solid $white;
+    border-radius: $border-radius-qrcode;
+    box-sizing: content-box;
+    height: 59px;
+    margin-top: 20px;
+    width: 59px;
+  }
+
+
+  &:hover {
+    background-color: $radical_red;
+
+    .ticket__info {
+      flex-direction: column;
+      min-width: 130px;
+
+      & p ~ p {
+        margin-top: 20px;
+        margin-left: 0;
+      }
+    }
+
+    .ticket__poster {
+      display: block;
+    }
+
+    .ticket__container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ticket__seat {
+      display: flex;
+    }
+
+    .ticket__qrcode {
+      display: block;
+    }
+  }
+}

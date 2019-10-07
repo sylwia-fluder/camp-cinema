@@ -65,7 +65,7 @@ function validateMovie(movie) {
     cast: Joi.array(),
     production: Joi.string().min(5).max(50),
     releaseDate: Joi.date(),
-    posterURL: Joi.string().min(5).max(50).required(),
+    posterURL: Joi.string().min(5).max(255).required(),
   };
 
   return Joi.validate(movie, schema);
