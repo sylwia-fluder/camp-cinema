@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Home from './pages/Home';
+import MyPayments from './pages/MyPayments';
 import MyTickets from './pages/MyTickets';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
@@ -19,7 +20,10 @@ export const TOAST_OPTIONS = {
 };
 
 const App = () => {
-    const [authTokens, setAuthTokens] = useState();
+    const localStorageToken = localStorage.getItem(STORAGE_NAMES.TOKEN);
+    const [authTokens, setAuthTokens] = useState(
+        localStorageToken === 'undefined' || localStorageToken === null ? '' : localStorageToken
+    );
 
     const setTokens = (data) => {
         localStorage.setItem(STORAGE_NAMES.TOKEN, JSON.stringify(data));
@@ -37,6 +41,7 @@ const App = () => {
                         <Route exact path={ROUTES.HOME} component={Home}/>
                         <Route path={ROUTES.SIGN_IN} component={SignIn}/>
                         <Route path={ROUTES.SIGN_UP} component={SignUp}/>
+                        <PrivateRoute exact path={ROUTES.MY_PAYMENTS} component={MyPayments}/>
                         <PrivateRoute path={ROUTES.MY_TICKETS} component={MyTickets}/>
                     </div>
                 </React.Fragment>

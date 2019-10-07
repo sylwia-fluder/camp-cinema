@@ -1,0 +1,16 @@
+@import '../../styles/variables';
+
+$border-radius-empty-list: 10px;
+$box-shadow-text: 4px 0 4px rgba(0, 0, 0, 0.25);
+$box-shadow-container: 4px 0 4px rgba(0, 0, 0, 0.25);
+
+.empty__info {
+  background-color: $radical_red;
+  border-radius: $border-radius-empty-list;
+  box-shadow: $box-shadow-container;
+  color: $white;
+  display: inline-block;
+  font-weight: $fontWeight_Bold;
+  padding: 15px;
+  text-shadow: $box-shadow-text;
+}

@@ -5,7 +5,7 @@ import { useAuth } from './context/auth';
 import { ROUTES } from './constants';
 
 const PrivateRoute = ({component: Component, ...rest}) => {
-    const {authTokens} = useAuth();
+    const { authTokens } = useAuth();
 
     return (
         <Route {...rest}

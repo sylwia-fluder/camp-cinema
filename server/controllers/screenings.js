@@ -15,7 +15,7 @@ function getScreeningRoom(){
 }
 
 function checkSeatStatus(place){
-  return place.status ==='available';
+  return place.status !=='available';
 }
 
 async function seatUpdateAsReserved(res, id, row, num){
