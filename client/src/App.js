@@ -11,6 +11,7 @@ import Navbar from './components/Navbar'
 import PrivateRoute from './PrivateRoute';
 import { AuthContext } from './context/auth';
 import { ROUTES, STORAGE_NAMES } from './constants';
+import Movies from './pages/Movies';
 
 export const TOAST_OPTIONS = {
     position: 'bottom-right',
@@ -41,7 +42,8 @@ const App = () => {
                         <Route exact path={ROUTES.HOME} component={Home}/>
                         <Route path={ROUTES.SIGN_IN} component={SignIn}/>
                         <Route path={ROUTES.SIGN_UP} component={SignUp}/>
-                        <PrivateRoute exact path={ROUTES.MY_PAYMENTS} component={MyPayments}/>
+                        <Route path={ROUTES.MOVIES} component={Movies}/>
+                        <PrivateRoute path={ROUTES.MY_PAYMENTS} component={MyPayments}/>
                         <PrivateRoute path={ROUTES.MY_TICKETS} component={MyTickets}/>
                     </div>
                 </React.Fragment>

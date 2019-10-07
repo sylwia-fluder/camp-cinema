@@ -1,0 +1,39 @@
+@import '../../styles/variables';
+@import '../../styles/functions';
+
+$link-color: $radical_red;
+$text-color: $white;
+
+.poster {
+    position: relative;
+     
+}
+
+.poster-img {
+    border-radius: 5px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.small {
+    height: 290px;
+}
+
+.big {
+    height: 374px;
+}
+
+.buy-ticket-link {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    z-index: 2;
+    background-color: $link-color;
+    color: $text-color;
+    padding: 5px;
+    width: 196px;
+    height: 35px;
+    left: 38px;
+    bottom: 3px;
+    text-decoration: none;
+}

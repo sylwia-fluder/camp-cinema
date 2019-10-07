@@ -11,7 +11,7 @@ const Navbar = () => {
     const logOut = () => setAuthTokens();
 
     const links = [
-        <Link className='nav-link'>MOVIES</Link>,
+        <Link to={ROUTES.MOVIES} className='nav-link'>MOVIES</Link>,
         <Link className='nav-link'>EVENTS</Link>,
         <Link className='nav-link'>MEMBERSHIP</Link>,
     ];
