@@ -11,7 +11,6 @@ $font-weight-logo: $fontWeight_Bold;
     text-decoration: none;
     background-color: $logo-box-color;
     color: $text-color;
-    //height: 85px;
     align-items: center;
     width: 18vw;
     padding: 5px;
@@ -19,8 +18,8 @@ $font-weight-logo: $fontWeight_Bold;
 }
 
 .logo-img {
-    height: 85px;
-    fill: $text-color;
+    font-size: calculatePxToRem(85px);
+    color: inherit;
     margin: 0 5px;
 }
 
